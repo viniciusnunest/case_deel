@@ -3,7 +3,7 @@ case_deel:
     dev:
       account: ovhzooa-rv77147
       database: dev_deel
-      password: "{{ env_var('DBT_PASSWORD') }}"
+      password: <DBT_PASSWORD>
       role: ACCOUNTADMIN
       schema: dbt_ci
       threads: 4
