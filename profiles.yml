@@ -1,6 +1,6 @@
 case_deel:
   outputs:
-    dev:
+    ci:
       account: ovhzooa-rv77147
       database: dev_deel
       password: <DBT_PASSWORD>
@@ -10,4 +10,4 @@ case_deel:
       type: snowflake
       user: VINICIUSNUNEST
       warehouse: case_deel
-  target: dev
+  
