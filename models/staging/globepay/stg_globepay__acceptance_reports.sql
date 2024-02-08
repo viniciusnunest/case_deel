@@ -1,29 +1,14 @@
-WITH source AS (
-    SELECT 
-        external_ref,
-        status,
-        source,
-        ref,
-        date_time,
-        state,
-        cvv_provided,
-        amount,
-        country,
-        currency,
-        rates
-    FROM {{ source('globepay', 'acceptance_report') }}
-)
-
-SELECT
-    external_ref,
-    status,
-    source,
-    ref,
-    date_time,
-    state,
-    cvv_provided,
-    amount,
-    country,
-    currency,
-    rates
-FROM source
+SELECT 
+    external_ref        AS acceptance_ref,
+    status              AS acceptance_status,
+    source              AS acceptance_source,
+    ref                 AS acceptance_internal_ref,
+    date_time           AS acceptance_date_time,
+    state               AS acceptance_state,
+    cvv_provided        AS acceptance_cvv_provided,
+    amount              AS acceptance_amount,
+    country             AS acceptance_country,
+    currency            AS acceptance_currency,
+    rates               AS acceptance_rates
+    
+FROM {{ source('globepay', 'acceptance_report') }}

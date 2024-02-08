@@ -1,15 +1,7 @@
-WITH source AS (
-    SELECT 
-        external_ref,
-        status,
-        source,
-        chargeback
-    FROM {{ source('globepay', 'chargeback_report') }}
-)
-
-SELECT
-    external_ref,
-    status,
-    source,
-    chargeback
-FROM source
+SELECT 
+    external_ref        AS chargeback_ref,
+    status              AS chargeback_status,
+    source              AS chargeback_source,
+    chargeback          AS chargeback_flag
+    
+FROM {{ source('globepay', 'chargeback_report')}}

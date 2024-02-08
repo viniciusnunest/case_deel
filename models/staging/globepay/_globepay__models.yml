@@ -4,16 +4,16 @@ models:
   - name: stg_globepay__chargeback_reports
     description: Staging model for Globepay chargeback reports.
     columns:
-      - name: external_ref
+      - name: chargeback_ref
         description: Unique external reference identifier for the transaction.
         tests:
           - unique
           - not_null
-      - name: status
+      - name: chargeback_status
         description: Status of the chargeback (e.g., true for charged back).
-      - name: source
+      - name: chargeback_source
         description: Source of the chargeback report.
-      - name: chargeback
+      - name: chargeback_flag
         description: Indicator if the transaction was charged back.
         tests:
           - not_null
@@ -21,28 +21,28 @@ models:
   - name: stg_globepay__acceptance_reports
     description: Staging model for Globepay acceptance reports.
     columns:
-      - name: external_ref
+      - name: acceptance_ref
         description: Unique external reference identifier for the transaction.
         tests:
           - unique
           - not_null
-      - name: status
+      - name: acceptance_status
         description: Transaction status (e.g., true for accepted).
-      - name: source
+      - name: acceptance_source
         description: Source of the acceptance report.
-      - name: ref
+      - name: acceptance_internal_ref
         description: Internal reference or identifier for the transaction.
-      - name: date_time
+      - name: acceptance_date_time
         description: Timestamp of the transaction.
-      - name: state
+      - name: acceptance_state
         description: State of the transaction (accepted, declined).
-      - name: cvv_provided
+      - name: acceptance_cvv_provided
         description: Indicates if CVV was provided for the transaction.
-      - name: amount
+      - name: acceptance_amount
         description: Transaction amount.
-      - name: country
+      - name: acceptance_country
         description: Country of the transaction.
-      - name: currency
+      - name: acceptance_currency
         description: Currency of the transaction.
-      - name: rates
+      - name: acceptance_rates
         description: Exchange rates applicable to the transaction, stored in JSON format.
