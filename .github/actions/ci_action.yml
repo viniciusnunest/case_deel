@@ -1,0 +1,27 @@
+name: DBT CI Snowflake
+on:
+  pull_request:
+      types: [opened, reopened, synchronize, ready_for_review]
+
+jobs:
+  dbt-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dbt
+      run: pip install dbt-snowflake
+
+    - name: dbt debug
+      run: dbt debug --profile snowflake
+
+    - name: dbt run
+      run: dbt run --profile snowflake
+
+    - name: dbt test
+      run: dbt test --profile snowflake

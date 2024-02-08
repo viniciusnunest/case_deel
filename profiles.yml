@@ -1,0 +1,13 @@
+case_deel:
+  outputs:
+    dev:
+      account: ovhzooa-rv77147
+      database: dev_deel
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      role: ACCOUNTADMIN
+      schema: dbt_ci
+      threads: 4
+      type: snowflake
+      user: VINICIUSNUNEST
+      warehouse: case_deel
+  target: dev
