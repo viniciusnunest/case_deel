@@ -38,6 +38,7 @@ jobs:
 
     - name: Lightdash CLI deploy
       env:
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
         LIGHTDASH_API_KEY: ${{ secrets.LIGHTDASH_API_KEY }}
         LIGHTDASH_PROJECT: ${{ secrets.LIGHTDASH_PROJECT }}
         LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}
