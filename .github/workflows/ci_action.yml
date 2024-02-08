@@ -14,20 +14,6 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install dbt
-      run: pip install dbt-snowflake
-
-    - name: dbt debug
-      env:
-        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt debug --profile dbt_deel --target ci
-
-    - name: dbt build
-      env:
-        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt build --profile dbt_deel --target ci --full-refresh 
-    #I didn't configure state:modified and defer because it was a test and I didn't have enough time
-
     - name: Install Node.js for Lightdash CLI
       uses: actions/setup-node@v2
       with:
@@ -43,4 +29,4 @@ jobs:
         LIGHTDASH_PROJECT: ${{ secrets.LIGHTDASH_PROJECT }}
         LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}
       run: |
-        lightdash generate -s payments+ +customers tag:prod --project-dir . --profiles-dir /home/runner/work/case_deel/case_deel --profile dbt_deel --target prod
+        lightdash dbt run -s payments+ +customers tag:prod --project-dir . --profiles-dir /home/runner/work/case_deel/case_deel --profile dbt_deel --target prod
