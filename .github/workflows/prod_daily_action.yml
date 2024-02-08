@@ -1,7 +1,8 @@
-name: DBT RUN CI - Snowflake
+name: DBT RUN DAILY PROD - Snowflake
 on:
-  pull_request:
-      types: [opened, reopened, synchronize, ready_for_review]
+  workflow_dispatch:
+      schedule:
+        - cron: '0 9 * * *'
 
 jobs:
   dbt-test:
@@ -20,14 +21,14 @@ jobs:
     - name: dbt debug
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt debug --profile dbt_deel --target ci
+      run: dbt debug --profile dbt_deel --target prod
 
     - name: dbt run
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt run --profile dbt_deel --target ci
+      run: dbt run --profile dbt_deel --target prod
 
     - name: dbt test
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt test --profile dbt_deel --target ci
+      run: dbt test --profile dbt_deel --target prod
