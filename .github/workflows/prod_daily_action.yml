@@ -23,12 +23,7 @@ jobs:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
       run: dbt debug --profile dbt_deel --target prod
 
-    - name: dbt run
+    - name: dbt build
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt run --profile dbt_deel --target prod
-
-    - name: dbt test
-      env:
-        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt test --profile dbt_deel --target prod
+      run: dbt build --profile dbt_deel --target prod

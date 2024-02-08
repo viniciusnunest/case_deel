@@ -20,7 +20,7 @@ FROM {{ ref('stg_globepay__acceptance_reports') }}
 WHERE acceptance_currency = '{{ currency }}'
 
 {% if is_incremental() %}
-    and acceptance_date_time >= (select max(acceptance_date_time) from {{ this }})
+    and acceptance_date_time > (select max(acceptance_date_time) from {{ this }})
 {% endif %}
 
 {%- if not loop.last -%}

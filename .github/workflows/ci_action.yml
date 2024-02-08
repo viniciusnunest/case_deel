@@ -22,12 +22,7 @@ jobs:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
       run: dbt debug --profile dbt_deel --target ci
 
-    - name: dbt run
+    - name: dbt build
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt run --profile dbt_deel --target ci
-
-    - name: dbt test
-      env:
-        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt test --profile dbt_deel --target ci
+      run: dbt build --profile dbt_deel --target ci #I didn't configure state:modified and defer because it was a test and I didn't have enough time
