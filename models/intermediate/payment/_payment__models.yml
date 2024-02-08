@@ -1,38 +1,8 @@
 version: 2
 
 models:
-  - name: stg_globepay__chargeback_reports
-    description: Staging model for Globepay chargeback reports.
-    columns:
-      - name: chargeback_ref
-        description: Unique external reference identifier for the transaction.
-        tests:
-          - unique
-          - not_null
-          - relationships:
-              to: ref('stg_globepay__acceptance_reports')
-              field: acceptance_ref 
-      - name: chargeback_status
-        description: Status of the chargeback (e.g., true for charged back).
-      - name: chargeback_source
-        description: Source of the chargeback report.
-      - name: chargeback_flag
-        description: Indicator if the transaction was charged back.
-        tests:
-          - not_null
-
-  - name: stg_globepay__acceptance_reports
-    description: Staging model for Globepay acceptance reports.
-    config:
-      elementary:
-        timestamp_column: "acceptance_date_time"
-    tests:
-      - elementary.volume_anomalies:
-          time_bucket:
-            period: day
-            count: 1
-          config:
-            severity: warn
+  - name: int_payment__reports
+    description: Combines acceptance and chargeback report information for comprehensive analysis.
     columns:
       - name: acceptance_ref
         description: Unique external reference identifier for the transaction.
@@ -62,3 +32,31 @@ models:
         description: Currency of the transaction.
       - name: acceptance_rates
         description: Exchange rates applicable to the transaction, stored in JSON format.
+      - name: chargeback_status
+        description: Status of the chargeback (e.g., true for charged back).
+      - name: chargeback_source
+        description: Source of the chargeback report.
+      - name: chargeback_flag
+        description: Indicator if the transaction was charged back.
+        tests:
+          - not_null:
+              config:
+                severity: error
+
+
+  - name: int_payment__rates
+    description: Extracts and standardizes currency exchange rates from acceptance transactions.
+    columns:
+      - name: acceptance_ref
+        description: Unique reference for each acceptance transaction.
+        tests:
+          - unique
+          - not_null
+      - name: acceptance_date_time
+        description: Timestamp of the acceptance transaction.
+        tests:
+          - not_null
+      - name: acceptance_currency
+        description: The currency of the transaction.
+      - name: currency_rate
+        description: The exchange rate applied to the currency.
