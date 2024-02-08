@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dm_payment__overview
+    description: >
+     Combines acceptance and chargeback report information for comprehensive analysis, 
+     adding essential fields for analysis in the dataviz tool group by country.
+    columns:
+      - name: acceptance_country
+        description: Country of the transaction.
+      - name: acceptance_date_time
+        description: Timestamp of the transaction.
+      - name: acceptance_cvv_provided
+        description: Indicates if CVV was provided for the transaction.
+      - name: chargeback_status
+        description: Status of the chargeback (e.g., true for charged back).
+      - name: currency
+        description: Standarlization of Currency as USD of the transaction.
+      - name: has_chargeback
+        description: >
+          Indicates whether the transaction was subject to a chargeback. A value of 1 means a chargeback occurred, 
+          and 0 means no chargeback.
+      - name: has_accepted
+        description: > 
+          Shows the acceptance status of the transaction. A value of 1 signifies the transaction was accepted, 
+          0 means it was declined, and NULL indicates an undefined state.
+      - name: sum_amount
+        description: Sum of transaction amount in USD.
+        meta:
+          metrics:
+            total_amount:
+              type: sum
+      - name: sum_chargeback
+        description: Sum of quantity of transactions has chargeback equal true.
+        meta:
+          metrics:
+            total_chargebacks:
+              type: sum
+      - name: sum_accepted
+        description: Sum of quantity of transactions has accepted equal accepted.
+        meta:
+          metrics:
+            total_accepted:
+              type: sum

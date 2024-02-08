@@ -27,3 +27,20 @@ jobs:
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
       run: dbt build --profile dbt_deel --target prod
+
+    - name: Install Node.js for Lightdash CLI
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16' 
+
+    - name: Install Lightdash CLI
+      run: npm install -g @lightdash/cli@latest
+
+    - name: Lightdash CLI deploy
+      env:
+        LIGHTDASH_API_KEY: ${{ secrets.LIGHTDASH_API_KEY }}
+        LIGHTDASH_PROJECT: ${{ secrets.LIGHTDASH_PROJECT }}
+        LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}
+      run: |
+        lightdash deploy --profile dbt_deel --target prod
+      
