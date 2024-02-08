@@ -3,7 +3,7 @@
       materialized = 'incremental',
       unique_key = 'acceptance_ref',
       dist = 'acceptance_date_time',
-      incremental_strategy = 'delete+insert'
+      incremental_strategy = 'merge'
     )
 }}
 

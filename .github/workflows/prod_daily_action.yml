@@ -1,0 +1,29 @@
+name: DBT RUN DAILY PROD - Snowflake
+on:
+  workflow_dispatch:
+      schedule:
+        - cron: '0 9 * * *'
+
+jobs:
+  dbt-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dbt
+      run: pip install dbt-snowflake
+
+    - name: dbt debug
+      env:
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+      run: dbt debug --profile dbt_deel --target prod
+
+    - name: dbt build
+      env:
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+      run: dbt build --profile dbt_deel --target prod
