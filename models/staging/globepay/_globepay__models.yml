@@ -20,6 +20,16 @@ models:
 
   - name: stg_globepay__acceptance_reports
     description: Staging model for Globepay acceptance reports.
+    config:
+      elementary:
+        timestamp_column: "acceptance_date_time"
+    tests:
+      - elementary.volume_anomalies:
+          time_bucket:
+            period: day
+            count: 1
+          config:
+            severity: warn
     columns:
       - name: acceptance_ref
         description: Unique external reference identifier for the transaction.
