@@ -1,4 +1,4 @@
-case_deel:
+dbt_deel:
   outputs:
     ci:
       account: ovhzooa-rv77147

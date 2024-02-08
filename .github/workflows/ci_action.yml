@@ -20,14 +20,14 @@ jobs:
     - name: dbt debug
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt debug --profile ci --target ci
+      run: dbt debug --profile dbt_deel --target ci
 
     - name: dbt run
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt run --profile ci --target ci
+      run: dbt run --profile dbt_deel --target ci
 
     - name: dbt test
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt test --profile ci --target ci
+      run: dbt test --profile dbt_deel --target ci
