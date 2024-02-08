@@ -20,7 +20,7 @@ jobs:
     - name: dbt debug
         env:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt debug --target ci
+      run: dbt debug --profile snowflake --target ci
 
     - name: dbt run
         env:
