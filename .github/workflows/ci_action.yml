@@ -43,4 +43,4 @@ jobs:
         LIGHTDASH_PROJECT: ${{ secrets.LIGHTDASH_PROJECT }}
         LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}
       run: |
-        lightdash deploy --project-dir . --profiles-dir /home/runner/work/case_deel/case_deel --profile dbt_deel --target prod
+        lightdash dbt run +tag:daily --project-dir . --profiles-dir /home/runner/work/case_deel/case_deel --profile dbt_deel --target prod
