@@ -3,11 +3,10 @@ case_deel:
     ci:
       account: ovhzooa-rv77147
       database: dev_deel
-      password: <DBT_PASSWORD>
+      password: "{{ env_var('DBT_PASSWORD') }}"
       role: ACCOUNTADMIN
       schema: dbt_ci
       threads: 4
       type: snowflake
       user: VINICIUSNUNEST
       warehouse: case_deel
-  

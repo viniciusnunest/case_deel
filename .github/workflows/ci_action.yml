@@ -18,16 +18,16 @@ jobs:
       run: pip install dbt-snowflake
 
     - name: dbt debug
-        env:
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+      env:
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
       run: dbt debug --profile snowflake --target ci
 
     - name: dbt run
-        env:
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+      env:
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
       run: dbt run --profile snowflake
 
     - name: dbt test
-        env:
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+      env:
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
       run: dbt test --profile snowflake
