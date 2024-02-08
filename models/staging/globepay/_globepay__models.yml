@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_globepay__chargeback_reports
+    description: Staging model for Globepay chargeback reports.
+    columns:
+      - name: external_ref
+        description: Unique external reference identifier for the transaction.
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: Status of the chargeback (e.g., true for charged back).
+      - name: source
+        description: Source of the chargeback report.
+      - name: chargeback
+        description: Indicator if the transaction was charged back.
+        tests:
+          - not_null
+
+  - name: stg_globepay__acceptance_reports
+    description: Staging model for Globepay acceptance reports.
+    columns:
+      - name: external_ref
+        description: Unique external reference identifier for the transaction.
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: Transaction status (e.g., true for accepted).
+      - name: source
+        description: Source of the acceptance report.
+      - name: ref
+        description: Internal reference or identifier for the transaction.
+      - name: date_time
+        description: Timestamp of the transaction.
+      - name: state
+        description: State of the transaction (accepted, declined).
+      - name: cvv_provided
+        description: Indicates if CVV was provided for the transaction.
+      - name: amount
+        description: Transaction amount.
+      - name: country
+        description: Country of the transaction.
+      - name: currency
+        description: Currency of the transaction.
+      - name: rates
+        description: Exchange rates applicable to the transaction, stored in JSON format.

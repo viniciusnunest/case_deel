@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+
+  - name: globepay
+    schema: globepay
+    database: raw_deel
+
+    tables: 
+      - name: chargeback_report
+        description: >
+          This table records details of chargeback transactions processed by Globepay,
+          including transaction ID, chargeback amount, currency, reason codes, and status
+          updates. Essential for analyzing disputed transactions and understanding
+          chargeback trends.
+        identifier: chargeback_report
+
+      - name: acceptance_report
+        description: >
+          This table captures data on payment transactions processed through Globepay,
+          detailing their acceptance or rejection status. It features transaction IDs,
+          amounts, currencies, payment methods, and outcome reasons, crucial for
+          monitoring payment success rates and identifying areas for optimization.
+        identifier: acceptance_report
