@@ -39,5 +39,5 @@ AND acceptance.acceptance_currency = rates.acceptance_currency
 AND acceptance.acceptance_date_time = rates.acceptance_date_time
 
 {% if is_incremental() %}
-    AND acceptance.acceptance_date_time > (SELECT max(acceptance_date_time) FROM {{ this }})
+    WHERE acceptance.acceptance_date_time > (SELECT max(acceptance_date_time) FROM {{ this }})
 {% endif %}
