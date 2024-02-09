@@ -2,11 +2,9 @@
     config(
       materialized = 'incremental',
       unique_key = 'acceptance_ref',
-      dist = 'acceptance_date_time',
       incremental_strategy = 'merge'
     )
 }}
-
 
 SELECT
     acceptance.acceptance_ref,

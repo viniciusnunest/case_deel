@@ -1,6 +1,5 @@
 {{
     config(
-      dist = 'acceptance_date_time',
       tags = ['daily']
     )
 }}
