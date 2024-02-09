@@ -1,7 +1,5 @@
 {{
     config(
-      materialized = 'incremental',
-      unique_key = 'acceptance_ref',
       dist = 'acceptance_date_time',
       tags = ['daily']
     )

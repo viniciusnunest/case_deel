@@ -7,7 +7,10 @@
     )
 }}
 
--- Here I opt to use jinja to ... 
+-- I chose to use jinja because it would be simpler to read this query, 
+-- instead of having several union alls exposed here. In addition, it also 
+-- facilitates maintenance if you have any new currency. 
+
 {%- set currencies = ["USD", "CAD", "EUR", "GBP", "MXN", "SGD", "AUD"] -%}
 
 {%- for currency in currencies %}

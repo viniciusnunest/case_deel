@@ -10,6 +10,10 @@ models:
         description: Country of the transaction.
       - name: acceptance_date_time
         description: Timestamp of the transaction.
+        meta:
+          dimension:
+            type: date
+            time_intervals: ['DAY', 'WEEK', 'MONTH', 'QUARTER', 'RAW']
       - name: acceptance_cvv_provided
         description: Indicates if CVV was provided for the transaction.
       - name: chargeback_status
