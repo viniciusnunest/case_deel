@@ -20,4 +20,14 @@ dbt_deel:
       type: snowflake
       user: VINICIUSNUNEST
       warehouse: case_deel
+    prod_lightdash:
+      account: ovhzooa-rv77147
+      database: prod_deel
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      role: ACCOUNTADMIN
+      schema: dbt
+      threads: 4
+      type: snowflake
+      user: VINICIUSNUNEST
+      warehouse: case_deel
 

@@ -9,24 +9,35 @@
 
 
 SELECT
-    a.acceptance_ref,
-    a.acceptance_status,
-    a.acceptance_source,
-    a.acceptance_internal_ref,
-    a.acceptance_date_time,
-    a.acceptance_state,
-    a.acceptance_cvv_provided,
-    a.acceptance_amount,
-    a.acceptance_country,
-    a.acceptance_currency,
-    a.acceptance_rates,
-    b.chargeback_status,
-    b.chargeback_source,
-    b.chargeback_flag
-FROM {{ ref('stg_globepay__acceptance_reports') }} a
-LEFT JOIN {{ ref('stg_globepay__chargeback_reports') }} b
-ON a.acceptance_ref = b.chargeback_ref
+    acceptance.acceptance_ref,
+    acceptance.acceptance_status,
+    acceptance.acceptance_source,
+    acceptance.acceptance_internal_ref,
+    acceptance.acceptance_date_time,
+    acceptance.acceptance_state,
+    acceptance.acceptance_cvv_provided,
+    acceptance.acceptance_country,
+    chargeback.chargeback_status,
+    chargeback.chargeback_source,
+    'USD' as currency,
+    (acceptance.acceptance_amount * rates.currency_rate) as USD_amount,
+    {{ bool_to_int('chargeback.chargeback_flag') }} as has_chargeback,
+    CASE
+        WHEN acceptance.acceptance_state = 'ACCEPTED' THEN 1
+        WHEN acceptance.acceptance_state = 'DECLINED' THEN 0
+        ELSE NULL 
+    END as has_accepted
+
+FROM {{ ref('stg_globepay__acceptance_reports') }} acceptance
+
+LEFT JOIN {{ ref('stg_globepay__chargeback_reports') }} chargeback
+ON acceptance.acceptance_ref = chargeback.chargeback_ref
+
+LEFT JOIN {{ ref('int_payment__rates') }} rates
+ON acceptance.acceptance_ref = rates.acceptance_ref
+AND acceptance.acceptance_currency = rates.acceptance_currency
+AND acceptance.acceptance_date_time = rates.acceptance_date_time
 
 {% if is_incremental() %}
-    and acceptance_date_time >= (select max(acceptance_date_time) from {{ this }})
+    AND acceptance.acceptance_date_time > (SELECT max(acceptance_date_time) FROM {{ this }})
 {% endif %}

@@ -24,24 +24,26 @@ models:
         description: State of the transaction (accepted, declined).
       - name: acceptance_cvv_provided
         description: Indicates if CVV was provided for the transaction.
-      - name: acceptance_amount
-        description: Transaction amount.
       - name: acceptance_country
         description: Country of the transaction.
-      - name: acceptance_currency
-        description: Currency of the transaction.
       - name: acceptance_rates
         description: Exchange rates applicable to the transaction, stored in JSON format.
       - name: chargeback_status
         description: Status of the chargeback (e.g., true for charged back).
       - name: chargeback_source
         description: Source of the chargeback report.
-      - name: chargeback_flag
-        description: Indicator if the transaction was charged back.
-        tests:
-          - not_null:
-              config:
-                severity: error
+      - name: currency
+        description: Standarlization of Currency as USD of the transaction.
+      - name: usd_amount
+        description: Transaction amount in USD.
+      - name: has_chargeback
+        description: >
+          Indicates whether the transaction was subject to a chargeback. A value of 1 means a chargeback occurred, 
+          and 0 means no chargeback.
+      - name: has_accepted
+        description: > 
+          Shows the acceptance status of the transaction. A value of 1 signifies the transaction was accepted, 
+          0 means it was declined, and NULL indicates an undefined state.
 
 
   - name: int_payment__rates

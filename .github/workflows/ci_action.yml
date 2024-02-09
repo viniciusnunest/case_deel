@@ -25,4 +25,5 @@ jobs:
     - name: dbt build
       env:
         DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-      run: dbt build --profile dbt_deel --target ci #I didn't configure state:modified and defer because it was a test and I didn't have enough time
+      run: dbt build --profile dbt_deel --target ci --full-refresh 
+    #I didn't configure state:modified and defer because it was a test and I didn't have enough time
