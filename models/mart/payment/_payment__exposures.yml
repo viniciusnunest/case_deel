@@ -1,0 +1,18 @@
+version: 2
+
+exposures:
+
+  - name: dashboard_deel
+    label: Dashboard to answer questions from the deel challenge
+    type: dashboard
+    maturity: high
+    url: https://app.lightdash.cloud/projects/1a38c326-d92e-45c6-b0e6-3f649b1cef67/dashboards/cc28453b-f541-49fb-a668-b7f797567a06/view
+    description: >
+      This dashboard is available on Lightdash and the sent file has the details to be accessed.
+
+    depends_on:
+      - ref('dm_payment__overview')
+
+    owner:
+      name: Vinicius Nunes
+      email: viniciusnunes.tavares@gmail.com
