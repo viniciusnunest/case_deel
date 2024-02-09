@@ -12,6 +12,7 @@ SELECT
     reports.chargeback_status,
     reports.has_chargeback,
     reports.has_accepted,
+    count(reports.acceptance_ref) as count_transactions,
     SUM(reports.USD_amount) as sum_amount,
     SUM(reports.has_accepted) as sum_accepted,
     SUM(reports.has_chargeback) as sum_chargeback

@@ -28,6 +28,12 @@ models:
         description: > 
           Shows the acceptance status of the transaction. A value of 1 signifies the transaction was accepted, 
           0 means it was declined, and NULL indicates an undefined state.
+      - name: count_transactions
+        description: count of transactions.
+        meta:
+          metrics:
+            total_transactions:
+              type: sum
       - name: sum_amount
         description: Sum of transaction amount in USD.
         meta:
